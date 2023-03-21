@@ -30,6 +30,8 @@ export const Feed = ({ pageNumber }) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       }
     );
