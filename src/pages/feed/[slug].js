@@ -26,7 +26,6 @@ export const Feed = ({ pageNumber }) => {
   const router = useRouter();
 
   const callApi = async () => {
-    console.log(process.env.NEXT_PUBLIC_NEWS_KEY);
     const count = 10;
     const options = {
       method: "GET",
@@ -43,7 +42,7 @@ export const Feed = ({ pageNumber }) => {
       },
       headers: {
         "X-BingApis-SDK": "true",
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_NEWS_KEY,
+        "X-RapidAPI-Key": process.env.NEXTJS_PUBLIC_NEWS_KEY,
         "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
       },
     };
