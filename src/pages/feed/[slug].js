@@ -24,8 +24,11 @@ export const Feed = ({ pageNumber }) => {
     "technology",
   ];
   const router = useRouter();
+  const axiosInstance = axios.create({
+    baseURL: "https://cors-anywhere.herokuapp.com/",
+  });
   const callApi = async () => {
-    return await axios.get(
+    return await axiosInstance.get(
       `https://newsapi.org/v2/top-headlines?country=in&category=${typeOfNews}&pageSize=5&page=${pageNumber}`,
       {
         headers: {
