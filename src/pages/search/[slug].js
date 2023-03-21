@@ -17,9 +17,6 @@ export const Search = ({ pageNumber }) => {
   const [filter, setFilter] = useState("relevancy");
   const [text, setText] = useState("");
   const [searchedData, setSearchedData] = useState([]);
-  const axiosInstance = axios.create({
-    baseURL: "https://cors-anywhere.herokuapp.com/",
-  });
   // const [typeOfNews, setTypeOfNews] = useState("general");
   // const categories = [
   //   "general",
@@ -38,11 +35,13 @@ export const Search = ({ pageNumber }) => {
       return [];
     } else {
       console.log("api call");
-      const result = await axiosInstance.get(
+      const result = await axios.get(
         `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=${filter}&pageSize=5&page=${pageNumber}`,
         {
           headers: {
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
           },
         }
       );

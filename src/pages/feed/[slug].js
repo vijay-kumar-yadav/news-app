@@ -4,7 +4,6 @@ import axios from "axios";
 import { Toolbar } from "@/components/toolbar";
 import { Loading } from "@/components/loading";
 import { SubToolbar } from "@/components/subToolbar";
-
 import styles from "../../styles/feed.module.css";
 import { AiOutlineFrown } from "react-icons/ai";
 import AppContext from "@/components/appContext";
@@ -24,11 +23,8 @@ export const Feed = ({ pageNumber }) => {
     "technology",
   ];
   const router = useRouter();
-  const axiosInstance = axios.create({
-    baseURL: "https://cors-anywhere.herokuapp.com/",
-  });
   const callApi = async () => {
-    return await axiosInstance.get(
+    return await axios.get(
       `https://newsapi.org/v2/top-headlines?country=in&category=${typeOfNews}&pageSize=5&page=${pageNumber}`,
       {
         headers: {
