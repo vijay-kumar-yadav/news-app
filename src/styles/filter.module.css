@@ -1,0 +1,37 @@
+.filterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.filterContainer label {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.filterContainer select {
+  padding: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333333;
+}
+.filterContainerDark {
+  display: flex;
+  align-items: center;
+}
+
+.filterContainerDark label {
+  font-size: 18px;
+  margin-right: 8px;
+  color: white;
+}
+
+.filterContainerDark select {
+  padding: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  background-color: #000000;
+  color: #dbdbdb;
+}

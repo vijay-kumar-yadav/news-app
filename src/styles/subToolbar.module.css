@@ -1,0 +1,26 @@
+.main {
+  background-color: darkgrey;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.main div {
+  margin: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.active {
+  color: #fff;
+}
+
+.inactive {
+  color: black;
+}
+.main div:hover {
+  color: #fff;
+}

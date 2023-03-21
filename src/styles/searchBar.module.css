@@ -1,0 +1,100 @@
+.searchBox {
+  position: relative;
+  margin: 10px;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer {
+  height: 40px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.inputContainerDark {
+  height: 40px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 6px;
+  color: white;
+  background-color: #333;
+  border: 1px solid #696868;
+}
+.inputContainerDark::placeholder {
+  color: white;
+}
+.searchButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.searchIcon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: #333;
+}
+.searchIconDark {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: #eae8e8;
+}
+.searchListSuggestion {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.searchListSuggestion p {
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.searchListSuggestion p:hover {
+  text-decoration: underline;
+}
+.searchListSuggestionDark {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  padding: 0.5rem;
+  background-color: #000000;
+  border: 1px solid #565656;
+  border-radius: 6px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.searchListSuggestionDark p {
+  margin: 0.5rem 0;
+  cursor: pointer;
+  color: white;
+}
+
+.searchListSuggestionDark p:hover {
+  text-decoration: underline;
+  color: #fff;
+}

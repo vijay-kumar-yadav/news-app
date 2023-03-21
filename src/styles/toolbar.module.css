@@ -1,0 +1,62 @@
+.main {
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  box-shadow: 0px 2.5px 10px black;
+  background-color: white;
+}
+.mainDark {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  box-shadow: 0px 2.5px 10px rgb(255, 255, 255);
+  background-color: black;
+}
+
+.main div {
+  margin: 25px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.main div:hover {
+  color: rgb(78, 78, 78);
+}
+
+.mainDark div {
+  margin: 25px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mainDark div:hover {
+  color: rgb(190, 190, 190);
+}
+
+.active {
+  color: rgb(78, 78, 78);
+  border-top: rgb(0, 0, 0) 2.5px solid;
+}
+
+.activeDark {
+  color: rgb(190, 190, 190);
+
+  border-top: rgb(255, 255, 255) 2.5px solid;
+}
+
+.inactive {
+  color: black;
+  border-bottom: none;
+}
+
+.inactiveDark {
+  color: rgb(255, 255, 255);
+  border-bottom: none;
+}
