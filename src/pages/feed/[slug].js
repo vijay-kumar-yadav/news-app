@@ -42,7 +42,7 @@ export const Feed = ({ pageNumber }) => {
       },
       headers: {
         "X-BingApis-SDK": "true",
-        "X-RapidAPI-Key": process.env.NEXTJS_PUBLIC_NEWS_KEY,
+        "X-RapidAPI-Key": "bfc8ff3d12msh8a317fb7700949cp19e0bajsn2f1b89041e68",
         "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
       },
     };
