@@ -12,34 +12,55 @@ export const Feed = ({ pageNumber }) => {
   const value = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [typeOfNews, setTypeOfNews] = useState("general");
+  const [typeOfNews, setTypeOfNews] = useState("India");
   const categories = [
-    "general",
-    "business",
-    "entertainment",
-    "health",
-    "science",
-    "sports",
-    "technology",
+    "Business",
+    "Entertainment",
+    "India",
+    "LifeStyle",
+    "Politics",
+    "ScienceAndTechnology",
+    "Sports",
+    "World",
   ];
   const router = useRouter();
+
   const callApi = async () => {
-    return await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=in&category=${typeOfNews}&pageSize=5&page=${pageNumber}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const count = 10;
+    const options = {
+      method: "GET",
+      url: "https://bing-news-search1.p.rapidapi.com/news/search",
+      params: {
+        count,
+        offset: (pageNumber - 1) * count,
+        safeSearch: "Off",
+        textFormat: "Raw",
+        cc: "in",
+        setLang: "EN",
+        originalImg: "true",
+        q: typeOfNews + " latest news",
+      },
+      headers: {
+        "X-BingApis-SDK": "true",
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_NEWS_BING_KEY,
+        "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
+      },
+    };
+    return await axios.request(options);
+    //  await axios.get(
+    //   `https://newsapi.org/v2/top-headlines?country=in&category=${typeOfNews}&pageSize=5&page=${pageNumber}`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+    //     },
+    //   }
+    // );
   };
   useEffect(() => {
     setLoading(true);
     callApi()
       .then((apiResponse) => {
-        setArticles(apiResponse.data.articles);
+        setArticles(apiResponse.data.value);
         setLoading(false);
       })
       .catch((err) => {
@@ -81,10 +102,26 @@ export const Feed = ({ pageNumber }) => {
                 className={value.state.isToggle ? styles.postDark : styles.post}
               >
                 <h1 onClick={() => window.open(article.url, "_blank")}>
-                  {article.title}
+                  {article.name}
                 </h1>
+                <div
+                  onClick={() => console.log(article)}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontStyle: "italic",
+                    color: value.state.isToggle ? "white" : "black",
+                  }}
+                >
+                  <span>{new Date(article.datePublished).toDateString()}</span>
+                  <span>
+                    {new Date(article.datePublished).toTimeString().slice(0, 5)}
+                  </span>
+                </div>
                 <p>{article.description}</p>
-                {article.urlToImage && <img src={article.urlToImage} />}
+                {article.image && (
+                  <img src={article.image.contentUrl} alt={index} />
+                )}
               </div>
             ))}
       </div>
@@ -110,9 +147,11 @@ export const Feed = ({ pageNumber }) => {
               </div>
               <div>#{pageNumber}</div>
               <div
-                className={pageNumber === 5 ? styles.disabled : styles.active}
+                className={
+                  articles.length === 0 ? styles.disabled : styles.active
+                }
                 onClick={() => {
-                  if (pageNumber < 5) {
+                  if (articles.length !== 0) {
                     router
                       .push(`/feed/${pageNumber + 1}`)
                       .then(() => window.scrollTo(0, 0));

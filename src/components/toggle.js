@@ -5,6 +5,7 @@ import sun from "../images/sun.png";
 import moonLight from "../images/moon-light.png";
 import sunLight from "../images/sun-light.png";
 import AppContext from "./appContext";
+import Image from "next/image";
 
 export const Toggle = () => {
   const value = useContext(AppContext);
@@ -18,9 +19,11 @@ export const Toggle = () => {
         padding: "0px",
       }}
     >
-      <img
+      <Image
+        width="30"
+        height="30"
+        style={{ marginRight: "5px" }}
         src={value.state.isToggle ? sunLight.src : sun.src}
-        style={{ width: "30px", height: "30px", marginRight: "5px" }}
         alt={"sun"}
         onClick={() => value.state.setIsToggle(false)}
       />
@@ -33,10 +36,12 @@ export const Toggle = () => {
         />
         <span className={`${styles.slider} ${styles.round}`} />
       </label>
-      <img
+      <Image
+        width="30"
+        height="30"
+        style={{ marginLeft: "5px" }}
         src={value.state.isToggle ? moonLight.src : moon.src}
         alt={"moon"}
-        style={{ width: "30px", height: "30px", marginLeft: "5px" }}
         onClick={() => value.state.setIsToggle(true)}
       />
     </div>

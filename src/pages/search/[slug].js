@@ -14,7 +14,7 @@ export const Search = ({ pageNumber }) => {
   const router = useRouter();
   const value = useContext(AppContext);
   const [loading, setLoading] = useState(false);
-  const [filter, setFilter] = useState("relevancy");
+  const [filter, setFilter] = useState("Day");
   const [text, setText] = useState("");
   const [searchedData, setSearchedData] = useState([]);
   // const [typeOfNews, setTypeOfNews] = useState("general");
@@ -29,31 +29,50 @@ export const Search = ({ pageNumber }) => {
   // ];
 
   const callApi = async (query) => {
-    router.push("/search/1");
     setLoading(true);
     if (query.length === 0) {
       return [];
     } else {
-      console.log("api call");
-      const result = await axios.get(
-        `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=${filter}&pageSize=5&page=${pageNumber}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return result.data.articles;
+      console.log("api 2 call");
+      const count = 5;
+      const options = {
+        method: "GET",
+        url: "https://bing-news-search1.p.rapidapi.com/news/search",
+        params: {
+          count,
+          offset: (pageNumber - 1) * count,
+          safeSearch: "Off",
+          textFormat: "Raw",
+          setLang: "EN",
+          originalImg: "true",
+          freshness: filter,
+          q: query + " latest news",
+        },
+        headers: {
+          "X-BingApis-SDK": "true",
+          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_NEWS_BING_KEY,
+          "X-RapidAPI-Host": "bing-news-search1.p.rapidapi.com",
+        },
+      };
+      const result = await axios.request(options);
+      return result;
+      // const result = await axios.get(
+      //   `https://newsapi.org/v2/everything?q=${query}&language=en&sortBy=${filter}&pageSize=5&page=${pageNumber}`,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+      //     },
+      //   }
+      // );
+      // return result.data.articles;
     }
   };
   useEffect(() => {
     if (text.length === 0) return;
     var intr = setTimeout(() => {
       callApi(text)
-        .then((data) => {
-          setSearchedData(data);
+        .then((res) => {
+          setSearchedData(res.data.value);
           setLoading(false);
         })
         .catch((err) => {
@@ -64,7 +83,7 @@ export const Search = ({ pageNumber }) => {
     }, 1000);
 
     return () => clearTimeout(intr);
-  }, [filter, text]);
+  }, [filter, text, pageNumber]);
 
   const handleSearch = () => {
     setFilter("relevancy");
@@ -124,7 +143,7 @@ export const Search = ({ pageNumber }) => {
                 className={value.state.isToggle ? styles.postDark : styles.post}
               >
                 <h1 onClick={() => window.open(article.url, "_blank")}>
-                  {article.title}
+                  {article.name}
                 </h1>
                 <p>{article.description}</p>
                 <div
@@ -135,9 +154,9 @@ export const Search = ({ pageNumber }) => {
                     color: value.state.isToggle ? "white" : "black",
                   }}
                 >
-                  <span>{new Date(article.publishedAt).toDateString()}</span>
+                  <span>{new Date(article.datePublished).toDateString()}</span>
                   <span>
-                    {new Date(article.publishedAt).toTimeString().slice(0, 5)}
+                    {new Date(article.datePublished).toTimeString().slice(0, 5)}
                   </span>
                 </div>
                 {/* {article.urlToImage && <img src={article.urlToImage} />} */}
@@ -166,9 +185,11 @@ export const Search = ({ pageNumber }) => {
               </div>
               <div>#{pageNumber}</div>
               <div
-                className={pageNumber === 5 ? styles.disabled : styles.active}
+                className={
+                  searchedData.length === 0 ? styles.disabled : styles.active
+                }
                 onClick={() => {
-                  if (pageNumber < 5) {
+                  if (searchedData.length !== 0) {
                     router
                       .push(`/search/${pageNumber + 1}`)
                       .then(() => window.scrollTo(0, 0));

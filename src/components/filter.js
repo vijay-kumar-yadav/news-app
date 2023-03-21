@@ -23,9 +23,9 @@ export const Filter = ({ onSelect, filter }) => {
         id="filter"
         value={filter}
       >
-        <option value="relevancy">Relevancy</option>
-        <option value="popularity">Popularity</option>
-        <option value="publishedAt">Published At</option>
+        <option value="Day">Day</option>
+        <option value="Week">Week</option>
+        <option value="Month">Month</option>
       </select>
     </div>
   );
