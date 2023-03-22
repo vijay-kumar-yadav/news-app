@@ -55,7 +55,7 @@ export const SearchBar = ({ text, setText, handleSearch }) => {
           onChange={(e) => setText(e.target.value)}
           placeholder="Search..."
         />
-        <div
+        {/* <div
           onClick={() => handleSearch()}
           className={styles.searchButtonContainer}
         >
@@ -70,7 +70,7 @@ export const SearchBar = ({ text, setText, handleSearch }) => {
               d="M19.71 18.29l-4.6-4.6a7.92 7.92 0 001.43-4.54A8 8 0 108 17a7.92 7.92 0 004.55-1.43l4.6 4.59a1 1 0 101.42-1.42zM4 9a5 5 0 115 5 5 5 0 01-5-5zm1 0a4 4 0 118 0 4 4 0 01-8 0z"
             ></path>
           </svg>
-        </div>
+        </div> */}
       </div>
       {showSuggestion && (
         <div

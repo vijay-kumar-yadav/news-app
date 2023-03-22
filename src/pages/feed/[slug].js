@@ -148,7 +148,7 @@ export const Feed = ({ pageNumber }) => {
               <div>#{pageNumber}</div>
               <div
                 className={
-                  articles.length === 0 ? styles.disabled : styles.active
+                  articles.length < 10 ? styles.disabled : styles.active
                 }
                 onClick={() => {
                   if (articles.length !== 0) {

@@ -186,10 +186,10 @@ export const Search = ({ pageNumber }) => {
               <div>#{pageNumber}</div>
               <div
                 className={
-                  searchedData.length === 0 ? styles.disabled : styles.active
+                  searchedData.length < 5 ? styles.disabled : styles.active
                 }
                 onClick={() => {
-                  if (searchedData.length !== 0) {
+                  if (searchedData.length < 5) {
                     router
                       .push(`/search/${pageNumber + 1}`)
                       .then(() => window.scrollTo(0, 0));
