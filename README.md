@@ -6,8 +6,6 @@ First, clone the app:
 
 ```bash
 git clone https://github.com/vijay-kumar-yadav/news-app.git
-# or
-download the repo
 ```
 
 Second, run the development server:
