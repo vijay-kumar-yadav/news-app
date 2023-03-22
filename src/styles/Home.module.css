@@ -17,8 +17,16 @@
 }
 
 .main h1 {
-  margin-top: 50px;
+  margin-top: -50px;
+  text-align: center;
 }
 .mainDark h1 {
-  margin-top: 50px;
+  margin-top: -50px;
+  text-align: center;
+}
+.main h3 {
+  text-align: center;
+}
+.mainDark h3 {
+  text-align: center;
 }
